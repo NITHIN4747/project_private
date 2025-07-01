@@ -28,13 +28,25 @@ const MemorySection = () => {
   }, []);
 
   return (
-    <div className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="py-20 romantic-grey-gradient relative overflow-hidden">
+      {/* Psychological depth layers */}
+      <div className="absolute inset-0">
+        <motion.div
+          animate={{ 
+            scale: [1, 1.05, 1],
+            opacity: [0.05, 0.1, 0.05]
+          }}
+          transition={{ duration: 12, repeat: Infinity }}
+          className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-300/20 to-transparent"
+        />
+      </div>
+
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="container mx-auto px-4"
+        className="container mx-auto px-4 relative z-10"
       >
         <div className="text-center mb-16">
           <motion.h2
