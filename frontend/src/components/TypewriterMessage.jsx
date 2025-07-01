@@ -74,11 +74,12 @@ const TypewriterMessage = ({ messages, onComplete }) => {
           className="space-y-12"
         >
           {/* Current typing message */}
-          {currentMessageIndex < allMessages.length && (
+          {currentMessageIndex < allMessages.length && currentText && (
             <motion.div
               key={currentMessageIndex}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="relative memory-card p-8 mx-4"
             >
@@ -95,29 +96,7 @@ const TypewriterMessage = ({ messages, onComplete }) => {
             </motion.div>
           )}
 
-          {/* Show all previous messages when current is complete */}
-          {currentMessageIndex > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
-              className="space-y-8"
-            >
-              {allMessages.slice(0, currentMessageIndex).map((msg, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
-                  animate={{ opacity: 0.7, y: 0, scale: 1 }}
-                  transition={{ delay: index * 0.3, duration: 0.8, ease: "easeOut" }}
-                  className="memory-card p-6 mx-4 depth-shadow-light"
-                >
-                  <p className="text-lg md:text-xl text-gray-500 leading-relaxed whisper-text">
-                    {msg}
-                  </p>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
+          {/* Remove previous messages display - only show current typing */}
 
           {/* Completion indicator */}
           {isComplete && (
