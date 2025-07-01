@@ -5,8 +5,6 @@ const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
   const y = useTransform(scrollYProgress, [0.7, 0.9], [50, 0]);
-
-const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
   const buttons = [
     {
       label: "Replay Memories",
