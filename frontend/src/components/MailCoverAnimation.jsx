@@ -71,7 +71,16 @@ const MailCoverAnimation = ({ onComplete }) => {
             className="relative z-10"
           >
             {/* Envelope Body */}
-            <div className="relative w-80 h-56 bg-gradient-to-br from-pink-100 to-rose-200 rounded-lg shadow-2xl">
+            <div className="relative w-80 h-56 bg-gradient-to-br from-pink-100 to-rose-200 rounded-lg shadow-2xl overflow-hidden">
+              {/* Background envelope image */}
+              <img 
+                src="/photos/mailcover.jpeg" 
+                alt="Mail Cover"
+                className="absolute inset-0 w-full h-full object-cover rounded-lg opacity-80"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
               {/* Envelope flap */}
               <motion.div
                 initial={{ rotateX: 0 }}
