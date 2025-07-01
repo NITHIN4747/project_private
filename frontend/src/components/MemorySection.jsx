@@ -144,11 +144,22 @@ const MemorySection = () => {
           </h3>
           <div className="relative">
             {/* Film tape background */}
-            <div className="bg-gray-800 py-8 px-4 rounded-2xl shadow-xl overflow-hidden">
-              <div className="flex space-x-6 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="bg-gray-800 py-8 px-4 rounded-2xl shadow-xl overflow-hidden relative">
+              {/* Continuous scrolling film tape */}
+              <motion.div
+                animate={{ x: [0, -400] }}
+                transition={{ 
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                className="flex space-x-6 pb-4"
+                style={{ width: 'calc(100% + 400px)' }}
+              >
+                {/* First set of photos */}
                 {filmTapePhotos.map((photoNum, index) => (
                   <motion.div
-                    key={photoNum}
+                    key={`first-${photoNum}`}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
@@ -177,7 +188,36 @@ const MemorySection = () => {
                     </motion.div>
                   </motion.div>
                 ))}
-              </div>
+                
+                {/* Duplicate set for seamless loop */}
+                {filmTapePhotos.map((photoNum, index) => (
+                  <motion.div
+                    key={`second-${photoNum}`}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="flex-shrink-0 relative group"
+                  >
+                    <div className="w-64 h-48 bg-white p-2 rounded-lg shadow-lg transform rotate-1 group-hover:rotate-0 transition-transform duration-300">
+                      <img
+                        src={`/photos/${photoNum}.jpg`}
+                        alt={`Memory ${photoNum}`}
+                        className="w-full h-full object-cover rounded"
+                        onError={(e) => {
+                          e.target.src = `https://via.placeholder.com/400x300/e5e7eb/6b7280?text=Memory+${photoNum}`;
+                        }}
+                      />
+                    </div>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      className="absolute -bottom-2 left-2 right-2 bg-white/90 backdrop-blur-sm p-2 rounded-lg text-center"
+                    >
+                      <p className="text-gray-700 text-sm font-light">
+                        {captions[photoNum - 1]}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </motion.div>
               
               {/* Film holes */}
               <div className="absolute top-2 left-0 right-0 flex justify-around">
