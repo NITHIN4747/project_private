@@ -74,16 +74,17 @@ const TypewriterMessage = ({ messages, onComplete }) => {
           {currentMessageIndex < allMessages.length && (
             <motion.div
               key={currentMessageIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="relative"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative memory-card p-8 mx-4"
             >
-              <p className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-700 leading-relaxed">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-light text-gray-600 leading-relaxed intimate-text">
                 {currentText}
                 <motion.span
                   animate={{ opacity: [1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
-                  className="ml-1 text-pink-400"
+                  className="ml-2 text-gray-400 typewriter-cursor"
                 >
                   |
                 </motion.span>
@@ -95,19 +96,22 @@ const TypewriterMessage = ({ messages, onComplete }) => {
           {currentMessageIndex > 0 && (
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              className="space-y-6"
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2 }}
+              className="space-y-8"
             >
               {allMessages.slice(0, currentMessageIndex).map((msg, index) => (
-                <motion.p
+                <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 0.6, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  className="text-lg md:text-xl text-gray-500 leading-relaxed"
+                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                  animate={{ opacity: 0.7, y: 0, scale: 1 }}
+                  transition={{ delay: index * 0.3, duration: 0.8, ease: "easeOut" }}
+                  className="memory-card p-6 mx-4 depth-shadow-light"
                 >
-                  {msg}
-                </motion.p>
+                  <p className="text-lg md:text-xl text-gray-500 leading-relaxed whisper-text">
+                    {msg}
+                  </p>
+                </motion.div>
               ))}
             </motion.div>
           )}
