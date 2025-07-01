@@ -41,13 +41,34 @@ const TypewriterMessage = ({ messages, onComplete }) => {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-16">
-      <div className="max-w-4xl w-full text-center">
+    <div className="min-h-screen flex items-center justify-center px-4 py-16 romantic-grey-gradient relative">
+      {/* Emotional background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Subtle animated shapes for psychological comfort */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-gray-200/30 to-transparent rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{ 
+            scale: [1.1, 1, 1.1],
+            opacity: [0.1, 0.15, 0.1]
+          }}
+          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+          className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-gradient-to-br from-gray-300/20 to-transparent rounded-full blur-2xl"
+        />
+      </div>
+
+      <div className="max-w-4xl w-full text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="space-y-12"
         >
           {/* Current typing message */}
           {currentMessageIndex < allMessages.length && (
