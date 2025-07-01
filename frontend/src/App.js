@@ -7,6 +7,7 @@ import TypewriterMessage from './components/TypewriterMessage';
 import MemorySection from './components/MemorySection';
 import MailCoverAnimation from './components/MailCoverAnimation';
 import MessageBox from './components/MessageBox';
+import FinalProposal from './components/FinalProposal';
 import BottomNavigation from './components/BottomNavigation';
 import { Toaster } from './components/ui/toaster';
 
