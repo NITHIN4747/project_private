@@ -1,52 +1,111 @@
-import { useEffect } from "react";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './App.css';
+import WelcomePopup from './components/WelcomePopup';
+import FloatingHearts from './components/FloatingHearts';
+import TypewriterMessage from './components/TypewriterMessage';
+import MemorySection from './components/MemorySection';
+import MailCoverAnimation from './components/MailCoverAnimation';
+import MessageBox from './components/MessageBox';
+import BottomNavigation from './components/BottomNavigation';
+import { Toaster } from './components/ui/toaster';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+  const [showMessageBox, setShowMessageBox] = useState(false);
+  const [typewriterComplete, setTypewriterComplete] = useState(false);
+  
+  const memorySectionRef = useRef(null);
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
+  const handleEnter = () => {
+    setShowWelcome(false);
+    setTimeout(() => setShowContent(true), 500);
+  };
+
+  const handleExit = () => {
+    const confirmExit = window.confirm("Are you sure you want to leave? 💔");
+    if (confirmExit) {
+      window.close();
     }
   };
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
+  const handleReplayMemories = () => {
+    if (memorySectionRef.current) {
+      memorySectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  };
+
+  const handleSayMessage = () => {
+    setShowMessageBox(true);
+  };
+
+  const messages = [
+    "Hey Sambar...",
+    "Nee unnoda parents ku importance kudukara maari, ithu innum un mela irukka love & respect ah increase pannudhu...",
+    "There hasn't been a day I haven't thought of you.",
+    "Every memory with you still lives in my heart.",
+    "I made this to show how much you still mean to you 💌"
+  ];
 
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+    <div className="App min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
+      {/* Welcome Popup */}
+      <WelcomePopup 
+        isOpen={showWelcome}
+        onEnter={handleEnter}
+        onLater={handleExit}
+      />
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      {/* Main Content */}
+      <AnimatePresence>
+        {showContent && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="relative"
+          >
+            {/* Floating Hearts Background */}
+            <FloatingHearts />
+
+            {/* Typewriter Messages */}
+            <TypewriterMessage 
+              messages={messages}
+              onComplete={() => setTypewriterComplete(true)}
+            />
+
+            {/* Memory Section */}
+            <div ref={memorySectionRef}>
+              <MemorySection />
+            </div>
+
+            {/* Mail Cover Animation */}
+            <MailCoverAnimation />
+
+            {/* Bottom Navigation */}
+            {typewriterComplete && (
+              <BottomNavigation
+                onReplayMemories={handleReplayMemories}
+                onSayMessage={handleSayMessage}
+                onExit={handleExit}
+              />
+            )}
+
+            {/* Message Box Modal */}
+            <MessageBox
+              isOpen={showMessageBox}
+              onClose={() => setShowMessageBox(false)}
+            />
+
+            {/* Toast Notifications */}
+            <Toaster />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
