@@ -119,28 +119,38 @@ const TypewriterMessage = ({ messages, onComplete }) => {
           {/* Completion indicator */}
           {isComplete && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, type: "spring" }}
-              className="flex justify-center items-center space-x-4 mt-12"
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 2, type: "spring", damping: 20 }}
+              className="flex flex-col items-center space-y-6 mt-16"
             >
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 10, -10, 0]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="text-4xl"
-              >
-                💖
-              </motion.div>
-              <p className="text-gray-600 text-lg font-light">
-                Scroll down to relive our memories...
-              </p>
+              <div className="memory-card p-8 depth-shadow-medium">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.15, 1],
+                    rotate: [0, 8, -8, 0]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="text-5xl mb-4"
+                  style={{ animation: 'intimateHeartbeat 2s ease-in-out infinite' }}
+                >
+                  💖
+                </motion.div>
+                <p className="text-gray-600 text-xl font-light emotional-heading">
+                  Scroll down to relive our memories...
+                </p>
+                <motion.p
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-gray-400 text-sm mt-3 whisper-text italic"
+                >
+                  Let each memory touch your heart again
+                </motion.p>
+              </div>
             </motion.div>
           )}
         </motion.div>
