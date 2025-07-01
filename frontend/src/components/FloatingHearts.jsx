@@ -65,7 +65,16 @@ const FloatingHearts = () => {
               filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
             }}
           >
-            {heart.emoji}
+            {heart.useImage ? (
+              <img 
+                src="/heart.png" 
+                alt="heart" 
+                className="w-8 h-8"
+                style={{ width: `${heart.size * 2}rem`, height: `${heart.size * 2}rem` }}
+              />
+            ) : (
+              heart.emoji
+            )}
           </motion.div>
         ))}
       </AnimatePresence>
