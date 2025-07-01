@@ -90,6 +90,9 @@ function App() {
             {/* Mail Cover Animation */}
             <MailCoverAnimation />
 
+            {/* Final Proposal - The Heart of Everything */}
+            <FinalProposal />
+
             {/* Bottom Navigation */}
             {typewriterComplete && (
               <BottomNavigation
