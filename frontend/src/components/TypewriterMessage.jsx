@@ -22,10 +22,13 @@ const TypewriterMessage = ({ messages, onComplete }) => {
         charIndex++;
       } else {
         clearInterval(typeInterval);
+        // Fade out after completing message and wait
         setTimeout(() => {
-          setCurrentMessageIndex(prev => prev + 1);
-          setCurrentText('');
-        }, 2000);
+          setCurrentText(''); // Clear current text
+          setTimeout(() => {
+            setCurrentMessageIndex(prev => prev + 1);
+          }, 500); // Small delay before next message
+        }, 2500); // Show completed message for 2.5 seconds
       }
     }, 80);
 
