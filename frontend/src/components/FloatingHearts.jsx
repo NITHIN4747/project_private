@@ -13,7 +13,8 @@ const FloatingHearts = () => {
         delay: Math.random() * 2,
         duration: 8 + Math.random() * 4,
         size: 0.8 + Math.random() * 0.4,
-        emoji: ['💖', '💕', '💗', '🤍', '🩷', '💝'][Math.floor(Math.random() * 6)]
+        emoji: ['💖', '💕', '💗', '🤍', '🩷', '💝'][Math.floor(Math.random() * 6)],
+        useImage: Math.random() > 0.3 // 70% chance to use the heart image
       };
       
       setHearts(prev => [...prev.slice(-20), heart]);
