@@ -52,7 +52,10 @@ function App() {
   ];
 
   return (
-    <div className="App min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
+    <div className="App min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 romantic-grey-gradient relative overflow-hidden">
+      {/* Subtle background patterns for psychological depth */}
+      <div className="absolute inset-0 bg-pattern-dots opacity-30"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent"></div>
       {/* Welcome Popup */}
       <WelcomePopup 
         isOpen={showWelcome}
