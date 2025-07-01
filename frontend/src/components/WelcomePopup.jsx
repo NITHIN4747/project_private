@@ -52,23 +52,35 @@ const WelcomePopup = ({ isOpen, onEnter, onLater }) => {
                   </p>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.06, y: -2 }}
+                    whileTap={{ scale: 0.96 }}
                     onClick={onEnter}
-                    className="w-full bg-gradient-to-r from-green-400 to-green-500 text-white py-4 px-6 rounded-2xl font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-green-500 hover:to-green-600"
+                    className="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white py-5 px-8 rounded-2xl font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-500 hover:from-gray-700 hover:to-gray-800 emotional-button relative overflow-hidden"
                   >
-                    Enter 💝
+                    <motion.div
+                      initial={{ x: '-100%' }}
+                      whileHover={{ x: '100%' }}
+                      transition={{ duration: 0.6 }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    />
+                    <span className="relative z-10 flex items-center justify-center space-x-3">
+                      <span>Enter</span>
+                      <motion.span
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >💝</motion.span>
+                    </span>
                   </motion.button>
                   
                   <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.03, y: -1 }}
+                    whileTap={{ scale: 0.97 }}
                     onClick={onLater}
-                    className="w-full bg-gradient-to-r from-red-300 to-red-400 text-white py-3 px-6 rounded-2xl font-light shadow-md hover:shadow-lg transition-all duration-300 hover:from-red-400 hover:to-red-500"
+                    className="w-full bg-gradient-to-r from-gray-300 to-gray-400 text-gray-700 py-4 px-6 rounded-2xl font-light shadow-md hover:shadow-lg transition-all duration-500 hover:from-gray-400 hover:to-gray-500 hover:text-white whisper-text"
                   >
-                    Later 💭
+                    Maybe later 💭
                   </motion.button>
                 </div>
               </motion.div>
