@@ -48,22 +48,25 @@ const MemorySection = () => {
         viewport={{ once: true }}
         className="container mx-auto px-4 relative z-10"
       >
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl md:text-5xl font-light text-gray-700 mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-light text-gray-600 mb-6 emotional-heading"
           >
             Our Beautiful Memories
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-gray-500 text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            viewport={{ once: true }}
+            className="text-gray-500 text-lg whisper-text leading-relaxed"
           >
-            Every picture tells our story 💕
+            Every picture tells our story 💕<br />
+            <span className="text-sm italic opacity-70">Each frame holds a piece of my heart</span>
           </motion.p>
         </div>
 
