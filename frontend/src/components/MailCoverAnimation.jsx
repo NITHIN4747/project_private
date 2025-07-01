@@ -116,8 +116,8 @@ const MailCoverAnimation = ({ onComplete }) => {
                 </motion.div>
               </motion.div>
 
-              {/* Envelope front */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-50 to-rose-100 rounded-lg p-6 flex items-center justify-center">
+              {/* Envelope front overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/90 to-rose-100/90 rounded-lg p-6 flex items-center justify-center backdrop-blur-sm">
                 <motion.div
                   animate={{ 
                     opacity: [0.5, 1, 0.5],
