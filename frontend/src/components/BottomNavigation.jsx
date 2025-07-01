@@ -28,9 +28,7 @@ const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      style={{ opacity, y }}
       className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent p-6 z-40"
     >
       <div className="max-w-4xl mx-auto">
