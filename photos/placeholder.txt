@@ -1,0 +1,7 @@
+Placeholder files for photos 1.jpg to 10.jpg and mailcover.jpeg will be handled by the error handling in the image tags.
+
+The images will show placeholder URLs when the actual image files are not found:
+- 1.jpg to 10.jpg: Memory photos
+- mailcover.jpeg: Mail envelope image
+
+User can replace these with actual photos later.
