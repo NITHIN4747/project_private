@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const FinalProposal = () => {
+const FinalProposal = ({ proposalRef }) => {
   return (
     <div className="min-h-screen flex items-center justify-center py-20 romantic-grey-gradient relative overflow-hidden">
       {/* Emotional background elements */}
@@ -129,7 +129,7 @@ const FinalProposal = () => {
               viewport={{ once: true }}
               className="pt-8 border-t border-gray-200/50"
             >
-              <p className="text-lg font-light text-gray-600 whisper-text italic">
+              <p className="text-lg font-light text-gray-600 whisper-text italic" ref={proposalRef}>
                 – Nithin 
                 <motion.span
                   animate={{ 

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import './App.css';
 import WelcomePopup from './components/WelcomePopup';
 import FloatingHearts from './components/FloatingHearts';
@@ -18,6 +19,8 @@ function App() {
   const [typewriterComplete, setTypewriterComplete] = useState(false);
   
   const memorySectionRef = useRef(null);
+  const proposalRef = useRef(null);
+  const isProposalInView = useInView(proposalRef, { amount: 0 });
 
   const handleEnter = () => {
     setShowWelcome(false);
@@ -71,7 +74,7 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative"
+            className="relative pb-32"
           >
             {/* Floating Hearts Background */}
             <FloatingHearts />
@@ -91,16 +94,14 @@ function App() {
             <MailCoverAnimation />
 
             {/* Final Proposal - The Heart of Everything */}
-            <FinalProposal />
+            <FinalProposal proposalRef={proposalRef} />
 
             {/* Bottom Navigation */}
-            {typewriterComplete && (
-              <BottomNavigation
-                onReplayMemories={handleReplayMemories}
-                onSayMessage={handleSayMessage}
-                onExit={handleExit}
-              />
-            )}
+            <BottomNavigation
+              onReplayMemories={handleReplayMemories}
+              onSayMessage={handleSayMessage}
+              onExit={handleExit}
+            />
 
             {/* Message Box Modal */}
             <MessageBox

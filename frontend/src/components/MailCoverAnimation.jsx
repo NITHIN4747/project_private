@@ -85,8 +85,7 @@ const MailCoverAnimation = ({ onComplete }) => {
               <motion.div
                 initial={{ rotateX: 0 }}
                 animate={{ 
-                  rotateX: isEnvelopeOpen ? -180 : 0,
-                  transformOrigin: "bottom"
+                  rotateX: isEnvelopeOpen ? -180 : 0
                 }}
                 transition={{ 
                   duration: 1, 
@@ -96,7 +95,8 @@ const MailCoverAnimation = ({ onComplete }) => {
                 className="absolute -top-16 left-0 right-0 h-20 bg-gradient-to-br from-rose-200 to-pink-300 rounded-t-lg border-b-2 border-pink-300 shadow-lg"
                 style={{ 
                   clipPath: "polygon(0 100%, 50% 0, 100% 100%)",
-                  transformStyle: "preserve-3d"
+                  transformStyle: "preserve-3d",
+                  transformOrigin: "bottom"
                 }}
               >
                 {/* Heart seal */}

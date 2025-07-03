@@ -1,10 +1,20 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
-  const y = useTransform(scrollYProgress, [0.7, 0.9], [50, 0]);
+  const [atBottom, setAtBottom] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const pageHeight = document.body.offsetHeight;
+      setAtBottom(scrollPosition >= pageHeight - 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // check on mount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const buttons = [
     {
       label: "Replay Memories",
@@ -26,16 +36,14 @@ const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
     }
   ];
 
+  if (!atBottom) return null;
+
   return (
-    <motion.div
-      style={{ opacity, y }}
-      className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent p-6 z-40"
+    <div
+      className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white to-transparent p-6 z-40 mb-16"
     >
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+        <div
           className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
         >
           {buttons.map((button, index) => (
@@ -77,7 +85,7 @@ const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
               />
             </motion.button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Proposal line */}
         <motion.div
@@ -101,7 +109,7 @@ const BottomNavigation = ({ onReplayMemories, onSayMessage, onExit }) => {
           </motion.p>
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
